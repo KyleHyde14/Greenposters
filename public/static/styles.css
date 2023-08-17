@@ -1,0 +1,91 @@
+body, html{
+    height: 100%;
+    width: 100%;
+    background-color: #444;
+    color: rgb(15, 146, 89);
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.play-buttons{
+    display: flex;
+    margin-top: 5%;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.mt-5{
+    max-width: 40%;
+    justify-self: center;
+}
+
+h1{
+    font-size: 10vh;
+    color: rgb(15, 146, 89);
+}
+
+button{
+    border: none;
+}
+
+button:hover{
+    scale: 1.3;
+}
+
+#spanish{
+    background: linear-gradient(red, yellow, red);
+    color: #222;
+    font-size: 5vh;
+    border-radius: 2px;
+}
+
+#english{
+    background: 
+    linear-gradient(to right, #012169 15%, transparent 20%, transparent 100%),
+    repeating-linear-gradient(to bottom, #C8102E, #C8102E 2px, white 3px, white 5px);
+    background-size: 100% 10px, 100% 10px;
+    color: #222;
+    font-size: 5vh;
+    border-radius: 2px;
+}
+
+.lang-choice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-card{
+    display: grid;
+    place-items: center;
+    gap: 2%;
+    width: 60%;
+    background-color: inherit;
+    border: none;
+}
+
+.game-card * {
+    width: 50%;
+    min-height: 20%;
+}
+
+#reveal{
+    width: 60%;
+    height: 50%;
+    border-radius: 5px;
+}
+
+#playerRole{
+    color: rgb(15, 146, 89);
+}
+
+#endGame{
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
+}
