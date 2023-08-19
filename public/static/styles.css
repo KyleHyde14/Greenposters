@@ -89,3 +89,20 @@ button:hover{
     flex-direction: column;
     max-width: 40%;
 }
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 5vh;
+    }
+    .mt-5 {
+        max-width: 80%; 
+    }
+
+    .game-card{
+        width: 80%;
+    }
+
+    button:hover{
+        scale: 1.0;
+    }
+}
