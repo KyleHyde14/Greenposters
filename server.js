@@ -10,6 +10,6 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
 })
 
-http.listen(5000, (y) =>{
+http.listen(PORT, () =>{
     console.log(`Server is running at https://localhost:${PORT}`)
 })
