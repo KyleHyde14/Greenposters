@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         current = alphaList[pos]
         names.textContent = current.name
         role.textContent = current.role
-        imposterName.textContent = imposter.name
+        imposterName.textContent = imposter.name + ' Was the Greenposter!!'
     }
 
     function getRandomInt(max) {
