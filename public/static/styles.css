@@ -22,6 +22,10 @@ section{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 p{
@@ -93,4 +97,39 @@ ul{
     height: 60%;
     z-index: 5;
     background-color: rgba(114, 236, 183, .5);
+}
+
+@media screen and (max-width: 768px) {
+    p {
+        font-size: 2rem;
+    }
+
+    button {
+        font-size: 1.8rem;
+    }
+
+    #add_player_input, #add_player_button, #see_role_button {
+        font-size: 1.4rem;
+    }
+
+    input {
+        font-size: 1.4rem;
+    }
+
+    li {
+        font-size: 1.6rem;
+    }
+
+    #player_role {
+        font-size: 2rem;
+    }
+
+    #see_workplace {
+        font-size: 2.25rem;
+    }
+
+    #greenposter_reveal_button {
+        width: 80%;
+        height: 80%;
+    }
 }
