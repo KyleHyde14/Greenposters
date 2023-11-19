@@ -78,7 +78,9 @@ li{
 
 ul{
     display: flex;
-    width: 80%;
+    width: fit-content;
+    padding: 1% 2%;
+    overflow-wrap: break-word;
     justify-content: center;
     align-items: center;
 }
