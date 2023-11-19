@@ -65,6 +65,7 @@ input{
 
 li{
     list-style: none;
+    display: flex;
     font-size: larger;
     background-color: rgba(114, 236, 183, .5);
     border: none;
@@ -73,16 +74,20 @@ li{
     width: fit-content;
     padding: 1%;
     color: #eee;
-    margin: 0 1%;
+    margin: 3% 2% 0 -2%;
+    justify-self: start;
 }
 
 ul{
-    display: flex;
-    width: fit-content;
-    padding: 1% 2%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    overflow: hidden;
     overflow-wrap: break-word;
-    justify-content: center;
-    align-items: center;
+    width: 95%;
+    height: fit-content;
+    position: relative;
+    margin: 2%;
 }
 
 #player_role{

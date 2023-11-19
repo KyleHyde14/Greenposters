@@ -41,7 +41,7 @@ const add_player_input = document.getElementById('add_player_input')
 const choose_imposter_button = document.getElementById('choose_imposter')
 
 function reloadUL(){
-    player_ul.innerHTML = '<h1>Juegan: </h1>'
+    player_ul.innerHTML = ''
 
     playerList.forEach(player => {
         const newLi = document.createElement('li')
@@ -60,13 +60,15 @@ add_player_button.addEventListener('click', () => {
         let newPlayerName = add_player_input.value.trim()
         newPlayerName = newPlayerName[0].toUpperCase() + newPlayerName.slice(1).toLowerCase()
 
-        if(newPlayerName.length >= 3){
+        if(newPlayerName.length >= 3 && newPlayerName.length <= 12){
             let newPlayer = new Player(newPlayerName, set_role())
             playerList.push(newPlayer)
 
             add_player_input.value = ''
 
             reloadUL()
+        } else{
+            alert('El nombre debe tener entre 3 y 12 caracteres')
         }
     } else{
         alert('Máximo de jugadores (10) alcanzado')
