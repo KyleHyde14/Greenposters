@@ -2,7 +2,7 @@ body, html{
     height: 100%;
     width: 100%;
     background-color: #444;
-    color: rgb(15, 146, 89);
+    color: rgba(15, 146, 89, 1);
 }
 
 body{
@@ -12,97 +12,85 @@ body{
     flex-direction: column;
 }
 
-.play-buttons{
+section{
     display: flex;
-    margin-top: 5%;
-    justify-content: space-between;
-    width: 100%;
+    text-align: center;
+    width: 95%;
+    height: 95%;
+    border-radius: 10px;
+    box-shadow: 2px 7px 10px rgba(15, 146, 89, 1);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.mt-5{
-    max-width: 40%;
-    justify-self: center;
-}
-
-h1{
-    font-size: 10vh;
-    color: rgb(15, 146, 89);
+p{
+    font-size: 300%;
+    margin-top: -5%;
 }
 
 button{
+    width: fit-content;
+    padding: 2%;
+    font-size: 250%;
+    background-color: rgba(114, 236, 183, .5);
     border: none;
+    outline: none;
+    border-radius: 5px;
+    color: #eee;
+    font-weight: light;
+    cursor: pointer;
 }
 
-button:hover{
-    scale: 1.3;
-}
-
-#spanish{
-    background: linear-gradient(red, yellow, red);
+#add_player_input, #add_player_button, #see_role_button{
+    width: fit-content;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 0 0 2% 0;
+    background-color: #fff;
     color: #222;
-    font-size: 5vh;
-    border-radius: 2px;
 }
 
-#english{
-    background: 
-    linear-gradient(to right, #012169 15%, transparent 20%, transparent 100%),
-    repeating-linear-gradient(to bottom, #C8102E, #C8102E 2px, white 3px, white 5px);
-    background-size: 100% 10px, 100% 10px;
-    color: #222;
-    font-size: 5vh;
-    border-radius: 2px;
+input{
+    padding-left: 2%;
+    min-height: 10%;
+    min-width: 30%;
+    font-size: 200%;
 }
 
-.lang-choice{
+li{
+    list-style: none;
+    font-size: larger;
+    background-color: rgba(114, 236, 183, .5);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    width: fit-content;
+    padding: 1%;
+    color: #eee;
+    margin: 0 1%;
+}
+
+ul{
     display: flex;
-    flex-direction: column;
+    width: 80%;
+    justify-content: center;
     align-items: center;
 }
 
-.game-card{
-    display: grid;
-    place-items: center;
-    gap: 2%;
+#player_role{
+    font-size: 250%;
+    margin-bottom: 5%;
+}
+
+#see_workplace{
+    font-size: 275%;
+}
+
+#greenposter_reveal_button{
     width: 60%;
-    background-color: inherit;
-    border: none;
-}
-
-.game-card * {
-    width: 50%;
-    min-height: 20%;
-}
-
-#reveal{
-    width: 60%;
-    height: 50%;
-    border-radius: 5px;
-}
-
-#playerRole{
-    color: rgb(15, 146, 89);
-}
-
-#endGame{
-    display: flex;
-    flex-direction: column;
-    max-width: 40%;
-}
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 5vh;
-    }
-    .mt-5 {
-        max-width: 80%; 
-    }
-
-    .game-card{
-        width: 80%;
-    }
-
-    button:hover{
-        scale: 1.0;
-    }
+    height: 60%;
+    z-index: 5;
+    background-color: rgba(114, 236, 183, .5);
 }

@@ -1,153 +1,155 @@
-import { english_game, spanish_game } from "./lists.js";
-document.addEventListener('DOMContentLoaded', () => {
-    class Player {
-        constructor(name, role, imposter){
-            this.name = name;
-            this.role = role;
-            this.imposter = imposter;
-        }
+import { jobList } from "./lists.js";
+
+function getRandomInt(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+class Player {
+    constructor(name, role){
+        this.name = name,
+        this.role = role
     }
 
-    function replay(){
-        endGame.style.display = 'none'
-        pos = 0
-        topic = Object.keys(game_list)[getRandomInt(Object.keys(game_list).length -1)]
-        alphaList = createPlayerList(topic, betaList)
-        alphaList = chooseImposter(alphaList)
-        gameCard.style.display = 'grid'        
-        current = alphaList[pos]
-        names.textContent = current.name
-        role.textContent = current.role
-        imposterName.textContent = imposter.name + ' Was the Greenposter!!'
+    getName(){
+        return this.name
+    }
+    getRole(){
+        return this.role
     }
 
-    function getRandomInt(max) {
-        return Math.round(Math.random() * max);
-    }
+}
 
-    function chooseImposter(list) {
-        let chosen = list[getRandomInt(list.length -1)]
-        imposter = chosen
-        chosen.imposter = true
-        chosen.role = 'imposter'
-        return list
-    }
+let workplace;
+let imposter
 
-    function genRole(theme){
-        return game_list[theme][getRandomInt(Object.keys(game_list)[0].length -1)]
-    }
-    
-    function createPlayerList(theme, list){
-        let defList = []
-        for(let j = 0; j < list.length; j++){
-            let name = list[j]
-            let playerRole = genRole(theme)
-            let newPlayer = new Player(name, playerRole, false)
-            defList.push(newPlayer)
-            console.log(defList)
-        }
-        return defList
-    }
+const start_button = document.getElementById('start_button')
+const start = document.getElementById('start')
+const adding_players = document.getElementById('adding_players')
 
-    let game_list;
-    let betaList = [];  
-    let alphaList = [];
-    let replayList = [];
-    let topic;
-    let pos = 0;
-    let current;
-    let imposter;
+start_button.addEventListener('click', () => {
+    start.style.display = 'none'
+    adding_players.style.display = 'flex'
+    workplace = Object.keys(jobList)[getRandomInt(0, Object.keys(jobList).length -1)]
+})
 
-    const langCard = document.getElementById('lang-choice')
-    const listCard = document.getElementById('list-maker')
-    const gameCard = document.getElementById('game-card')
-    
-    const englishButton = document.getElementById('english')
-    const spanishButton = document.getElementById('spanish')
+let playerList = []
+let pos = 0
 
-    englishButton.addEventListener('click', () => {
-        game_list = english_game
-        topic = Object.keys(game_list)[getRandomInt(Object.keys(game_list).length -1)]
-        langCard.style.display = 'none'
-        listCard.style.display = 'block'
+const add_player_button = document.getElementById('add_player_button')
+const player_ul = document.getElementById('player_ul')
+const add_player_input = document.getElementById('add_player_input')
+const choose_imposter_button = document.getElementById('choose_imposter')
+
+function reloadUL(){
+    player_ul.innerHTML = '<h1>Juegan: </h1>'
+
+    playerList.forEach(player => {
+        const newLi = document.createElement('li')
+        newLi.textContent = player.name
+        player_ul.appendChild(newLi)
     })
+}
 
-    spanishButton.addEventListener('click', () => {
-        game_list = spanish_game
-        topic = Object.keys(game_list)[getRandomInt(Object.keys(game_list).length -1)]
-        langCard.style.display = 'none'
-        listCard.style.display = 'block'
-    })
+function set_role(){
+    let role = getRandomInt(0, 9);
+    return jobList[workplace][role]
+}
 
-    const addPlayer = document.getElementById('add-player')
-    const startGame = document.getElementById('start')
+add_player_button.addEventListener('click', () => {
+    if(playerList.length < 10){
+        let newPlayerName = add_player_input.value.trim()
+        newPlayerName = newPlayerName[0].toUpperCase() + newPlayerName.slice(1).toLowerCase()
 
-    startGame.addEventListener('click', () => {
-        if (betaList.length >= 3 && betaList.length <= 10){
-            alphaList = createPlayerList(topic, betaList)
-            alphaList = chooseImposter(alphaList)
-            listCard.style.display = 'none'
-            gameCard.style.display = 'grid'
-            current = alphaList[pos]
-            names.textContent = current.name
-            role.textContent = current.role
-            imposterName.textContent = imposter.name + ' Was the Greenposter!!'
+        if(newPlayerName.length >= 3){
+            let newPlayer = new Player(newPlayerName, set_role())
+            playerList.push(newPlayer)
+
+            add_player_input.value = ''
+
+            reloadUL()
+        }
+    } else{
+        alert('Máximo de jugadores (10) alcanzado')
+    }
+})
+
+const see_roles = document.getElementById('see_roles')
+let player_name = document.getElementById('player_name')
+let player_role = document.getElementById('player_role')
+let see_workplace = document.getElementById('see_workplace')
+
+choose_imposter_button.addEventListener('click', () => {
+    if(playerList.length >= 3){
+        imposter = playerList[getRandomInt(0, playerList.length -1)]
+        imposter.role = 'Greenposter'
+        see_roles.style.display = 'flex'
+        adding_players.style.display = 'none'
+        if(playerList[pos].role != 'Greenposter'){
+            player_role.style.color = '#eee'
         }else{
-            prompt('You need between 3 and 10 people to play', null)
+            player_role.style.color = '#AA0000'
         }
-    })
+        player_name.innerHTML = playerList[pos].name
+        player_role.innerHTML = playerList[pos].role
+    } else{
+        alert('Mínimo debe haber 3 jugadores.')
+    }
+})  
 
-    addPlayer.addEventListener('click', () => {
-        if (betaList.length < 10){
-            let playerName = document.getElementById('new-player').value
-            if (playerName.length >= 1){
-                betaList.push(playerName)
-                document.getElementById('new-player').value = ''
-            }
-        } else{
-            prompt('Max is 10 players, press Start game to play.')
-        }
-    })
+const see_role_button = document.getElementById('see_role_button')
+const next_player_button = document.getElementById('next_player_button')
 
-    const names = document.getElementById('playerName')
-    const seeRole = document.getElementById('see-role')
-    const next = document.getElementById('next-player')
-    const reveal = document.getElementById('reveal')
-    const role = document.getElementById('playerRole')
-    const imposterName = document.getElementById('imposter-name')
-    const endGame = document.getElementById('endGame')
-    const playAgain = document.getElementById('play-again')
+see_role_button.addEventListener('click', () => {
+    player_role.style.display = 'block'
+    if(player_role.innerHTML != 'Greenposter'){
+        see_workplace.innerHTML = workplace
+        see_workplace.style.display = 'block'
+    }
+})
 
-    seeRole.addEventListener('click', () => {
-        role.style.display = 'block';
-    })
+const reveal = document.getElementById('reveal')
 
-    next.addEventListener('click', () => {
-        role.style.display = 'none'
-        pos = pos +1
-        if (pos >= alphaList.length){
-            reveal.style.display = 'block';
-            gameCard.style.display = 'none'
-            reveal.addEventListener('click', () => {
-                endGame.style.display = 'grid'
-                reveal.style.display = 'none'
-            })
+next_player_button.addEventListener('click', () => {
+    if(pos < playerList.length -1){
+        pos += 1
+        if(playerList[pos].role != 'Greenposter'){
+            player_role.style.color = '#eee'
         }else{
-            current = alphaList[pos]
-            names.textContent = current.name
-            role.textContent = current.role
+            player_role.style.color = '#AA0000'
         }
-    })
+        player_name.innerHTML = playerList[pos].name
+        player_role.innerHTML = playerList[pos].role
+        player_role.style.display = 'none'
+        see_workplace.style.display = 'none'
+    } else{
+        player_role.style.display = 'none'
+        see_workplace.style.display = 'none'
+        see_roles.style.display = 'none'
+        reveal.style.display = 'flex'
+    }
+})
 
-    playAgain.addEventListener('click', () => {
-        replay()
-    })
+const greenposter_name = document.getElementById('greenposter_name')
+const greenposter_reveal_button = document.getElementById('greenposter_reveal_button')
+const play_again = document.getElementById('play_again')
 
+greenposter_reveal_button.addEventListener('click', () => {
+    greenposter_name.innerHTML = `El greenposter era ${imposter.name}!!!`
+    greenposter_reveal_button.style.display = 'none'
+    greenposter_name.style.display = 'block'
+    play_again.style.display = 'block'
+})
 
-    document.addEventListener('keydown', (event) => {
-        if(event.key == 'Enter' && listCard.style.display != 'none'){
-            event.preventDefault()
-            addPlayer.click()
-        }
+play_again.addEventListener('click', () => {
+    workplace = Object.keys(jobList)[getRandomInt(0, Object.keys(jobList).length -1)]
+    pos = 0
+    playerList.map(player => {
+        player.role = set_role()
     })
-});
+    greenposter_name.innerHTML = ''
+    greenposter_name.style.display = 'none'
+    play_again.style.display = 'none'
+    reveal.style.display = 'none'
+    choose_imposter_button.click()
+    greenposter_reveal_button.style.display = 'block'
+})
