@@ -12,7 +12,7 @@ function App() {
   const startGame = () => {
     if (players.length >= 3) {
       // Asegura que el número de impostores no supere el máximo permitido
-      const maxImpostors = Math.floor(players.length / 5) || 1;
+      const maxImpostors = Math.floor(players.length / 5) + 1 || 1;
       const finalImpostorCount = Math.min(impostorCount, maxImpostors);
 
       setImpostorCount(finalImpostorCount); // Acepta la configuración final
