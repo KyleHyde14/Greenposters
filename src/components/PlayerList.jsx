@@ -28,7 +28,7 @@ const PlayerList = ({ players, setPlayers }) => {
       <div style={{ display: "flex", gap: "10px" }}>
         <input
           type="text"
-          placeholder="Nombre del Jugador"
+          placeholder="Nombre"
           value={newPlayerName}
           onChange={(e) => setNewPlayerName(e.target.value)}
           onKeyDown={handleKeyDown}

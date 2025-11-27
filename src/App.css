@@ -28,8 +28,9 @@ body {
 }
 
 .App {
-  width: 100%;
-  max-width: 600px;
+  width: 70dvw;
+  height: 80dvh;
+  max-width: 900px;
   background-color: var(--card-bg);
   border-radius: 20px;
   box-shadow: var(--shadow);
